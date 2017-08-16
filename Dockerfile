@@ -5,10 +5,10 @@ ENV EAP_INSTALLER=jboss-eap-6.4.0-installer.jar
 ENV EAP_PATCH_1=jboss-eap-6.4.9-patch.zip
 ENV EAP_PATCH_2=jboss-eap-6.4.16-patch.zip
 ENV SSO_ADAPTER=rh-sso-7.1.0-eap6-adapter.zip
-ENV EAP_INSTALLER_URL https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAAbcyQpocjZG5aS1DOmNmYxa/jboss-eap-6.4.0-installer.jar?dl=1
-ENV EAP_PATCH_1_URL https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAB-ctr59Y52pBiVU7gaJ4L-a/jboss-eap-6.4.9-patch.zip?dl=1
-ENV EAP_PATCH_2_URL https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAD6e54V2-aGwVRtCRlB7oiba/jboss-eap-6.4.16-patch.zip?dl=1
-ENV SSO_ADAPTER_URL https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAAdK3duL06Tg5ncu4R_F1Nga/rh-sso-7.1.0-eap6-adapter.zip?dl=1
+ENV EAP_INSTALLER_URL=https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAAbcyQpocjZG5aS1DOmNmYxa/jboss-eap-6.4.0-installer.jar?dl=1
+ENV EAP_PATCH_1_URL=https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAB-ctr59Y52pBiVU7gaJ4L-a/jboss-eap-6.4.9-patch.zip?dl=1
+ENV EAP_PATCH_2_URL=https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAD6e54V2-aGwVRtCRlB7oiba/jboss-eap-6.4.16-patch.zip?dl=1
+ENV SSO_ADAPTER_URL=https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAAdK3duL06Tg5ncu4R_F1Nga/rh-sso-7.1.0-eap6-adapter.zip?dl=1
 
 USER 1000
 COPY support/installation-eap support/installation-eap.variables /opt/jboss/
