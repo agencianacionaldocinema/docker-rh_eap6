@@ -1,6 +1,6 @@
-FROM jbossdemocentral/developer
+FROM jboss/base-jdk:8
 
-ENV EAP_HOME /opt/jboss/eap
+ENV JBOSS_HOME /opt/jboss/jboss
 ENV EAP_INSTALLER=jboss-eap-6.4.0-installer.jar
 ENV EAP_PATCH_1=jboss-eap-6.4.9-patch.zip
 ENV EAP_PATCH_2=jboss-eap-6.4.16-patch.zip
@@ -18,19 +18,19 @@ RUN curl -O -J -L $EAP_INSTALLER_URL \
     && curl -O -J -L $EAP_PATCH_2_URL \
     && curl -O -J -L $SSO_ADAPTER_URL \
     && java -jar /opt/jboss/$EAP_INSTALLER  /opt/jboss/installation-eap -variablefile /opt/jboss/installation-eap.variables \
-    && $EAP_HOME/bin/jboss-cli.sh --command="patch apply /opt/jboss/$EAP_PATCH_1 --override-all" \
-    && $EAP_HOME/bin/jboss-cli.sh --command="patch apply /opt/jboss/$EAP_PATCH_2 --override-all" \
-    && unzip -qo /opt/jboss/$SSO_ADAPTER  -d $EAP_HOME/ \
-    && ($EAP_HOME/bin/standalone.sh & ) \
+    && $JBOSS_HOME/bin/jboss-cli.sh --command="patch apply /opt/jboss/$EAP_PATCH_1 --override-all" \
+    && $JBOSS_HOME/bin/jboss-cli.sh --command="patch apply /opt/jboss/$EAP_PATCH_2 --override-all" \
+    && unzip -qo /opt/jboss/$SSO_ADAPTER  -d $JBOSS_HOME/ \
+    && ($JBOSS_HOME/bin/standalone.sh & ) \
     && sleep 6 \
-    && $EAP_HOME/bin/jboss-cli.sh --connect --file=$EAP_HOME/bin/adapter-install.cli \
-    && $EAP_HOME/bin/jboss-cli.sh --connect --command="/core-service=patching:ageout-history" \
+    && $JBOSS_HOME/bin/jboss-cli.sh --connect --file=$JBOSS_HOME/bin/adapter-install.cli \
+    && $JBOSS_HOME/bin/jboss-cli.sh --connect --command="/core-service=patching:ageout-history" \
     && kill -9 $(ps -c | grep java | cut -f3 -d" ") \
-    && rm -rf /opt/jboss/$EAP_INSTALLER /opt/jboss/$EAP_PATCH_1 /opt/jboss/$EAP_PATCH_2 /opt/jboss/$SSO_ADAPTER /opt/jboss/installation-eap /opt/jboss/installation-eap.variables $EAP_HOME/standalone/configuration/standalone_xml_history \
-    && rm -rf $EAP_HOME/.installation 
+    && rm -rf /opt/jboss/$EAP_INSTALLER /opt/jboss/$EAP_PATCH_1 /opt/jboss/$EAP_PATCH_2 /opt/jboss/$SSO_ADAPTER /opt/jboss/installation-eap /opt/jboss/installation-eap.variables $JBOSS_HOME/standalone/configuration/standalone_xml_history \
+    && rm -rf $JBOSS_HOME/.installation 
 
 
 EXPOSE 9990 8080
-VOLUME $EAP_HOME/standalone/logs
+VOLUME $JBOSS_HOME/standalone/logs
 
-CMD ["/opt/jboss/eap/bin/standalone.sh","-c","standalone.xml","-b", "0.0.0.0","-bmanagement","0.0.0.0"]
+CMD ["/opt/jboss/jboss/bin/standalone.sh","-c","standalone.xml","-b", "0.0.0.0","-bmanagement","0.0.0.0"]
