@@ -11,7 +11,8 @@ ENV EAP_PATCH_2_URL=https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAD6e54V2-aGwVRtC
 ENV SSO_ADAPTER_URL=https://www.dropbox.com/sh/6nd9w26h8i9q7kj/AAAdK3duL06Tg5ncu4R_F1Nga/rh-sso-7.1.0-eap6-adapter.zip?dl=1
 
 USER root
-RUN yum -y install apr openssl
+RUN yum -y install apr \
+    && yum clean all
 
 USER jboss
 COPY support/installation-eap support/installation-eap.variables /opt/jboss/
